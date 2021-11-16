@@ -29,7 +29,7 @@ Next, start the coffee pot server:
 
 In a separate terminal, start the web interface for the coffee pot server:
 
-    python3 web_server.py
+    python3 app.py
 
 After running the commands above, you are ready to start using the project.
 
