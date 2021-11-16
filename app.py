@@ -29,7 +29,7 @@ def index():
     if message_for_server:
         message = message_for_server.lower()
 
-    if method == "brew" or method == "post" and (message_for_server == "start" or message_for_server == "stop"):
+    if (method == "brew" or method == "post") and (message_for_server == "start" or message_for_server == "stop"):
         message = "BREW coffee://james HTTP/1.1\nContent-Type: application/coffee-pot-command\n"
         if additions:
             message = message + "\nAccept-Additions: " + "; ".join(additions)
@@ -100,6 +100,8 @@ def index():
     server.connect((HOST, PORT))
 
     server.send(bytes(message.encode()))
+
+    data = server.recv(1024).decode()
 
     return redirect("/")
 
