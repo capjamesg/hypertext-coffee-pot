@@ -100,34 +100,8 @@ def index():
     server.connect((HOST, PORT))
 
     server.send(bytes(message.encode()))
-    
-    data = server.recv(1024).decode()
 
-    if data and data.strip():
-        response = data.split("\r\n")
-
-        if message_for_server == "start":
-            session["brewing"] = True
-
-            if additions:
-                session["additions"] = additions
-            else:
-                additions = []
-            
-            for addition in additions:
-                if addition in MILKS:
-                    session["contains_milk"] = True
-
-        elif message_for_server == "stop":
-            session["brewing"] = False
-
-            if additions:
-                session.pop("additions", None)
-                session.pop("contains_milk", None)
-
-        return redirect("/")
-    else:
-        abort(500)
+    return redirect("/")
 
 @app.route("/log")
 def coffeepot_log():
@@ -172,4 +146,4 @@ def assets(path):
     return send_from_directory("assets", path)
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)

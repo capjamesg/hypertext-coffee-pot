@@ -47,7 +47,7 @@ def ensure_request_is_valid(url, content_type, method, processing_request, conne
 
     return processing_request
 
-def process_additions(headers, processing_request, pouring_milk):
+def process_additions(headers, processing_request, pouring_milk, connection):
     accept_additions = [header for header in headers if header.startswith("Accept-Additions")]
 
     if len(accept_additions) > 0:
@@ -55,6 +55,7 @@ def process_additions(headers, processing_request, pouring_milk):
         invalid_addition = False
 
         for item in additions:
+            print(item.lower().strip())
             if ACCEPTED_ADDITIONS.get(item.lower().strip()) is None:
                 response = "HTCPCP/1.1 406 Not Acceptable\r\n\r\n" + ", ".join(list(ACCEPTED_ADDITIONS.keys())).strip(", ")
                 connection.send(bytes(response.encode()))
@@ -85,7 +86,6 @@ def create_request_response(method, additions, pouring_milk):
         if response_body == "stop":
             with open("currently_brewing.json", "w+") as f:
                 f.write("{}")
-            response = "HTCPCP/1.1 200 OK\r\n\r\n"
         elif response_body == "start":
             now = datetime.datetime.now().strftime("%a, %d %b %Y %H:%M:%S")
             end_time = (datetime.datetime.now() + datetime.timedelta(minutes=5)).strftime("%a, %d %b %Y %H:%M:%S")
@@ -191,7 +191,7 @@ while True:
 
         processing_request = ensure_request_is_valid(url, content_type, method, processing_request, connection)
 
-        additions, processing_request, pouring_milk = process_additions(headers, processing_request, pouring_milk)
+        additions, processing_request, pouring_milk = process_additions(headers, processing_request, pouring_milk, connection)
 
         if method in ACCEPTED_METHODS:
             current_date = datetime.datetime.now().strftime("%a, %d %b %Y %H:%M:%S")
@@ -212,7 +212,7 @@ while True:
 
             print(final_response)
 
-            connection.send(bytes(response.encode("utf-8")))
+            connection.send(bytes(final_response.encode("utf-8")))
         
         processing_request = False
 
