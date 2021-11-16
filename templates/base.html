@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+        <title>{{ header }} | James' Coffee Pot</title>
+        
+        <link rel="stylesheet" href="https://jamesg.blog/assets/styles/styles.css">
+
+        <link href="mailto:jamesg@jamesg.blog" rel="me">
+
+        <link rel="icon" href="https://jamesg.blog/favicon.ico">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="webmention" href="https://webmention.jamesg.blog/endpoint">
+        <link rel="pingback" href="https://webmention.io/jamesg.blog/xmlrpc">
+
+        <link rel="micropub" href="https://micropub.jamesg.blog/micropub">
+        <link rel="authorization_endpoint" href="https://auth.jamesg.blog/auth">
+        <link rel="token_endpoint" href="https://auth.jamesg.blog/token">
+        
+        <link rel="microsub" href="https://microsub.jamesg.blog/endpoint">
+        
+        <style id="darkmode" media="none">
+            html {
+                background-color: #1F2937;
+            }
+            a {
+                color: lightgreen;
+                border-bottom: 2px dotted lightgreen;
+            }
+            a:hover {
+                color: #ccc;
+            }
+            h1, h2, h3 {
+                color: orange;
+            }
+            .social_interaction, .webmention {
+                background: none;
+            }
+            p, li, dt, dd, .indieweb_footer, input, label, td, th {
+                color: white;
+            }
+            input, textarea, select {
+                background-color: #0c2548;
+                color: #ccc;
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+            <a href="#main" class="accessibility_label">Skip to main content</a>
+            <nav id="top_navigation">
+                <p><a href="/">CoffeePot</a></p>
+                <ul>
+                    <li><a href="/log">CoffeePot Log</a></li>
+                    <li><a href="https://jamesg.blog">James' Coffee Blog</a></li>
+                </ul>
+            </nav>
+            <script>
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                  document.getElementById('darkmode').media = "all";
+                }
+        
+                if (localStorage.getItem('darkmode') == "true") {
+                  document.getElementById('darkmode').media = "all";
+                } else if (localStorage.getItem('darkmode') == "false") {
+                  document.getElementById('darkmode').media = "none";
+                }
+        
+                var navigation = document.getElementById("top_navigation");
+                var ul = navigation.getElementsByTagName("ul")[0];
+                
+                var li = document.createElement("li");
+                var dark_style = document.getElementById("darkmode");
+          
+                if (dark_style.media === "all") {
+                  li.innerHTML = "<a onclick='toggleTheme();'>Light Mode</a>";
+                } else {
+                  li.innerHTML = "<a onclick='toggleTheme();'>Dark Mode</a>";
+                }
+        
+                ul.appendChild(li);
+          
+                function toggleTheme() {
+                  if (dark_style.media === "all") {
+                    dark_style.media = "none";
+                    li.innerHTML = "<a onclick='toggleTheme();'>Dark Mode</a>";
+                    localStorage.setItem('darkmode', 'false');
+                  } else {
+                    dark_style.media = "all";
+                    li.innerHTML = "<a onclick='toggleTheme();'>Light Mode</a>";
+                    localStorage.setItem('darkmode', 'true');
+                  }
+                }
+            </script>
+        {% block content %}
+        {% endblock %}
+            <p class="accessibility_label"><a href="#main">Go Back to the Top</a></p>
+        </main>
+    </body>
+</html>

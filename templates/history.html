@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="webmention social_interaction">
+  <h1>{{ header }} ☕</h1>
+  <p>CoffeePot keeps a log of all coffees it has prepared. This log is presented below.</p>
+  <p>{{ coffees_brewed_count }} coffees have been brewed by CoffeePot.</p>
+  <h2>Coffee Log</h2>
+  {% if past_coffees %}
+    <table>
+        <thead>
+        <tr>
+            <th>Start of Brew Time</th>
+            <th>Beverage Type</th>
+            <th>Additions</th>
+            <th>End of Brew Time</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for coffee in past_coffees %}
+        <tr>
+            <td>{{ coffee.date }}</td>
+            <td>{{ coffee.beverage_type }}</td>
+            <td>{% if coffee.additions %}{{ ", ".join(coffee.additions).strip(", ") }}{% endif %}</td>
+            <td>{{ coffee.brew_time_end }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+  {% else %}
+    <p>No coffees have been prepared yet. You can make the first one!</p>
+  {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,7 @@
+<h2>CoffeePot View</h2>
+<img src='/assets/coffee_pot.gif' alt='Animated image of a coffee brewing'>
+<h2>Settings</h2>
+{% if pouring_milk != "" %}
+    <p><a href="/?method=when">Stop pouring milk in your coffee.</a></p>
+{% endif %}
+<p><a href="/?method=brew&message=stop">Stop brewing your coffee.</a></p>

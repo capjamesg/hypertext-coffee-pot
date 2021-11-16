@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="webmention social_interaction">
+  <h1>{{ header }} ☕</h1>
+  <h2>About CoffeePot</h2>
+  <p>CoffeePot lets you send requests compliant with the <a href="https://datatracker.ietf.org/doc/html/rfc2324">
+    Hyper Text Coffee Pot Control Protocol (HTCPCP)</a>.</p>
+  <p>This protocol is useful if you want to remotely control a coffee pot or machine using the internet.</p>
+  <p>This tool is currently configured to use a <strong>digital (read: not real) coffee pot</strong>.</p>
+  {% if brewing == True %}
+    <h2>CoffeePot Status</h2>
+    <p>Your coffee is brewing...</p>
+    {% if brew_time %}
+      <p>Brewing began on {{ brew_time }}.</p>
+      <p id="add_timer">Brewing will finish on {{ brew_time_end }}.</p>
+    {% endif %}
+    {% if additions %}
+      <p>The following additions were selected for your coffee:</p>
+      <ul>
+        {% for addition in additions %}
+          <li>{{ addition.title() }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+    {% include "includes/coffeepot_view.html" %}
+  {% else %}
+    <h2>CoffeePot Status</h2>
+    <p>No coffees are currently being made.</p>
+    {% include "includes/make_coffee_form.html" %}
+  {% endif %}
+</section>
+<script>
+  var add_timer = document.getElementById("add_timer");
+  var timer = document.createElement("p");
+  var now = new Date();
+
+  function countdown() {
+    var diff = new Date({{ finish_brewing_unix }} * 1000) - now;
+    var seconds = Math.floor(diff / 1000);
+    var minutes = Math.floor(seconds / 60);
+
+    minutes %= 60;
+    seconds %= 60;
+
+    // add padded 0
+    if (seconds < 10) {
+      seconds = "0" + seconds;
+    }
+
+    if (minutes < 10) {
+      minutes = "0" + minutes;
+    }
+
+    if (seconds > 0 || minutes > 0) {
+      timer.innerHTML = "Time left until your coffee is ready: " + minutes + ":" + seconds;
+    } else {
+      timer.innerHTML = "Your coffee is ready!";
+    }
+
+    add_timer.appendChild(timer);
+    setInterval(countdown, 1000);
+  }
+
+  setInterval(countdown, 1000);
+</script>
+{% endblock %}

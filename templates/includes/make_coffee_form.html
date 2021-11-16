@@ -1,0 +1,19 @@
+<h2>Start Brewing</h2>
+<p>CoffeePot is ready to take your order. Please specify how you like your coffee.</p>
+<form action="/" method="get">
+    <input type="hidden" name="method" value="brew">
+    <input type="hidden" name="message" value="start">
+    <label for="pots">Pot to use:</label><br>
+    <select name="pot" id="pots">
+    {% for key, value in available_pots.items() %}
+        <option value="{{ key }}">{{ value }}</option>
+    {% endfor %}
+    </select><br><br>
+    <label for="additions">Additions (you can select multiple additions):</label><br>
+    <select name="additions" multiple>
+    {% for key, value in accepted_additions.items() %}
+        <option value="{{ key }}">{{ value }}</option>
+    {% endfor %}
+    </select><br />
+    <input type="submit" value="Brew Coffee">
+</form>
