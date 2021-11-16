@@ -35,9 +35,17 @@ After running the commands above, you are ready to start using the project.
 
 Milk is poured in the coffee after five minutes of brewing. You can use the web application to send a WHEN request to stop pouring milk on demand.
 
+## Alternative Milk Support
+
+The coffee server can accept requests for almond, oat, soya, and coconut milk. While not defined in the original specification, these values have grown enough support among coffee drinkers to merit inclusion.
+
 ## HTTP 418 Status Code Support
 
 The coffee pot does not support the HTTP 418 status code. This is because the application only allows you to define a coffee pot as a brewing device.
+
+## TODOs
+
+[] Fix countdown timer on home page
 
 ## Technologies
 
