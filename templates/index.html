@@ -37,7 +37,7 @@
       
       countdown();
     
-      if (add_timer) {
+      if (add_timer && add_timer.innerHTML != "Coffee is ready!") {
         setInterval(countdown, 1000);
       }
     </script>
@@ -49,7 +49,7 @@
       <p>The following additions were selected for your coffee:</p>
       <ul>
         {% for addition in additions %}
-          <li>{{ addition.title() }}</li>
+          <li>{{ accepted_additions.get(addition) }}</li>
         {% endfor %}
       </ul>
     {% endif %}

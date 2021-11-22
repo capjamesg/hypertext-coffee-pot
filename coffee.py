@@ -22,7 +22,7 @@ with open("currently_brewing.json", "w+") as f:
 
 if not os.path.isfile("past_coffees.json"):
     with open("past_coffees.json", "w+") as f:
-        f.write("{}")
+        f.write("")
 
 def ensure_request_is_valid(url, content_type, method, processing_request, connection):
     if "://" not in url:

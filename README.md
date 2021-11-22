@@ -11,7 +11,7 @@ This project contains two programs:
 
 The coffee pot has the ability to track coffees so that a coffee cannot be ordered when one is already brewing.
 
-A live version of the coffee pot is available at [coffeepot.jamesg.blog](https://coffeepot.jamesg.blog)
+A live version of the coffee pot is available at [coffeepot.jamesg.blog](https://coffeepot.jamesg.blog).
 
 ## Screenshot
 
@@ -42,10 +42,6 @@ The coffee server can accept requests for almond, oat, soya, and coconut milk. W
 ## HTTP 418 Status Code Support
 
 The coffee pot does not support the HTTP 418 status code. This is because the application only allows you to define a coffee pot as a brewing device.
-
-## TODOs
-
-[] Fix countdown timer on home page
 
 ## Technologies
 

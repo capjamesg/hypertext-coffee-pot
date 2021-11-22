@@ -18,10 +18,10 @@
         <tbody>
         {% for coffee in past_coffees %}
         <tr>
-            <td>{{ coffee.date }}</td>
-            <td>{{ coffee.beverage_type }}</td>
-            <td>{% if coffee.additions %}{{ ", ".join(coffee.additions).strip(", ") }}{% endif %}</td>
-            <td>{{ coffee.brew_time_end }}</td>
+            <td data-label="Brew Start">{{ coffee.date }}</td>
+            <td data-label="Beverage Type">{{ coffee.beverage_type }}</td>
+            <td data-label="Additions">{% if coffee.additions %}{{ ", ".join(coffee.additions).strip(", ") }}{% endif %}</td>
+            <td data-label="Brew End">{{ coffee.brew_time_end }}</td>
         </tr>
         {% endfor %}
     </table>
